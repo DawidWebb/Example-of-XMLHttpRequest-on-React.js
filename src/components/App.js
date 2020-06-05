@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import User from "./User";
 import "./App.css";
 
 class App extends Component {
@@ -14,15 +14,17 @@ class App extends Component {
       const users = JSON.parse(xhr.response);
       this.setState({ users });
     };
+    // xhr.addEventListener('load', ()=>{})
     xhr.send();
   }
   render() {
     const users = this.state.users.map((user) => (
-      <div key={user.id}>
-        <h4>{user.name}</h4>
-        <p>{user.email}</p>
-        <p>{user.website}</p>
-      </div>
+      <User
+        key={user.id}
+        name={user.name}
+        email={user.email}
+        web={user.website}
+      />
     ));
     return <div>{users}</div>;
   }
