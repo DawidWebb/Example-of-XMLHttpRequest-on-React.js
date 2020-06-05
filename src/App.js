@@ -11,13 +11,20 @@ class App extends Component {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "https://jsonplaceholder.typicode.com/users", true);
     xhr.onload = () => {
-      console.log(xhr.status);
-      console.log(typeof xhr.response);
+      const users = JSON.parse(xhr.response);
+      this.setState({ users });
     };
     xhr.send();
   }
   render() {
-    return <div />;
+    const users = this.state.users.map((user) => (
+      <div key={user.id}>
+        <h4>{user.name}</h4>
+        <p>{user.email}</p>
+        <p>{user.website}</p>
+      </div>
+    ));
+    return <div>{users}</div>;
   }
 }
 
